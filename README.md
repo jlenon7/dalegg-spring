@@ -21,7 +21,9 @@ The intention behind this repository is to test `Spring MVC` projects consuming 
 
 > You need to create an account in Riot developer portal to get an API Key and set it inside of RiotApiServiceImpl
 
-<img src=".github/images/api-key.png" width="200px" align="center">
+<center>
+    <img src=".github/images/api-key.png" width="600px">
+</center>
 
 ## Running project local
 
@@ -49,7 +51,9 @@ java -jar target/dale-gg-1.0.0-SNAPSHOT.jar
 
 > First change the url of the database inside application.properties to dalegg-db instead of localhost
 
-<img src=".github/images/app-properties.png" width="200px" align="center">
+<center>
+    <img src=".github/images/app-properties.png" width="600px">
+</center>
 
 > Then run the project using docker-compose
 
@@ -61,6 +65,8 @@ docker-compose up -d --build
 
 ## Project home example
 
-<img src=".github/images/project.png" width="1000px" align="center">
+<center>
+    <img src=".github/images/project.png" width="1000px">
+</center>
 
 ---

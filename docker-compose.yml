@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  dalegg-spring:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dalegg-spring
+    volumes:
+      - ./:/process
+    ports:
+      - "8084:8084"
+    networks:
+      - dalegg-network
+    restart: on-failure
+
+  dalegg-db:
+    container_name: dalegg-db
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - .docker/volumes/db:/var/lib/postgres
+    environment:
+      POSTGRES_DATABASE: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_ROOT_PASSWORD: "root"
+    networks:
+      - dalegg-network
+    restart: on-failure
+
+networks:
+  dalegg-network:
+    external:
+      name: dalegg-network

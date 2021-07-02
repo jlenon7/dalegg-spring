@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+<section class="layout-content" layout:fragment="corpo">
+
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <i class="oi oi-caret-right"></i>
+                    <span>Lista de Partidas</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" id="listagem">
+        <div class="d-flex justify-content-center">
+            <img th:src="${'http://ddragon.leagueoflegends.com/cdn/11.12.1/img/profileicon/' + pagePartida.registros.get(0).invocador.getProfileIcon() + '.png'}" style="width: 150px; border-radius: 50%"/>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <h3 th:text="${'Partidas do Invocador ' + pagePartida.registros.get(0).invocador.getName()}"></h3>
+        </div>
+        </br>
+        <div th:replace="fragments/alert"></div>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-sm">
+                <thead>
+                <tr>
+                    <th>Rota jogada</th>
+                    <th>Campeão jogado</th>
+                    <th>
+                        <a class="" th:href="@{/invocador/listar/partidas/{id}(page=${pagePartida.pagina}, dir=asc, id=${pagePartida.registros.get(0).invocador.getId()})}" tabindex="-1">
+                            <span class="oi oi-arrow-bottom"></span></a>
+                        Dia da partida
+                        <a class="" th:href="@{/invocador/listar/partidas/{id}(page=${pagePartida.pagina}, dir=desc, id=${pagePartida.registros.get(0).invocador.getId()})}" tabindex="-1">
+                            <span class="oi oi-arrow-top"></span></a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${pagePartida.registros}">
+                    <td>
+                        <img th:src="@{~/image/positions/{lane}.png(lane=${i.lane})}" style="width: 40px; border-radius: 50%"/>
+                    </td>
+                    <td>
+                        <img th:src="@{~/image/champions/{champion}.png(champion=${i.champion})}" style="width: 40px; border-radius: 50%"/>
+                    </td>
+                    <td th:text="${#dates.format(new java.util.Date(i.timestamp), 'dd-mm-yyyy HH:mm')}">Dia da partida</td>
+                </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/invocador/listar/partidas/{id}(page=${1}, dir=${pagePartida.direcao}, id=${pagePartida.registros.get(0).invocador.getId()})}" tabindex="-1">First</a>
+                    </li>
+                    <li th:class="${pagePartida.pagina == 1} ? 'page-item disabled' : 'page-item'">
+                        <a class="page-link" th:href="@{/invocador/listar/partidas/{id}(page=${pagePartida.pagina - 1}, dir=${pagePartida.direcao}, id=${pagePartida.registros.get(0).invocador.getId()})}" tabindex="-1">Prev</a>
+                    </li>
+                    <li class="page-item">
+                        <span class="page-link" th:text="|${pagePartida.pagina} de ${pagePartida.totalDePaginas}|"></span> <!-- O pipe antes da primeira e última expressão faz a concatenação -->
+                    </li>
+                    <li th:class="${pagePartida.pagina == pagePartida.totalDePaginas} ? 'page-item disabled' : 'page-item'">
+                        <a class="page-link" th:href="@{/invocador/listar/partidas/{id}(page=${pagePartida.pagina + 1}, dir=${pagePartida.direcao}, id=${pagePartida.registros.get(0).invocador.getId()})}">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{/invocador/listar/partidas/{id}(page=${pagePartida.totalDePaginas}, dir=${pagePartida.direcao}, id=${pagePartida.registros.get(0).invocador.getId()})}" tabindex="-1">Last</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div th:replace="fragments/modal :: modal"></div>
+
+</section>
+</body>
+</html>

@@ -21,6 +21,8 @@ The intention behind this repository is to test `Spring MVC` projects consuming 
 
 > You need to create an account in Riot developer portal to get an API Key and set it inside of RiotApiServiceImpl
 
+[Click here to create you account in Riot API!](https://developer.riotgames.com/)
+
 <p align="center">
     <img src=".github/images/api-key.png" width="400px">
 </p>
@@ -70,3 +72,5 @@ docker-compose up -d --build
 </p>
 
 ---
+
+Made with 🖤 by [jlenon7](https://github.com/jlenon7) :wave:
